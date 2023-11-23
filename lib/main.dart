@@ -30,8 +30,6 @@ class QuizPage extends StatefulWidget {
   _QuizPageState createState() => _QuizPageState();
 }
 
-int qno = 0;
-
 class _QuizPageState extends State<QuizPage> {
   List<Widget> scoreKeeper = [];
   @override
@@ -44,7 +42,7 @@ class _QuizPageState extends State<QuizPage> {
           flex: 6,
           child: Center(
               child: Text(
-            quizBrain.getQuestionText(qno),
+            quizBrain.getQuestionText(),
             style: const TextStyle(color: Colors.white, fontSize: 20),
             textAlign: TextAlign.center,
           )),
@@ -59,7 +57,7 @@ class _QuizPageState extends State<QuizPage> {
                   onPressed: () {
                     // User picked true
                     setState(() {
-                      if (quizBrain.getQuestionAnswer(qno) == true) {
+                      if (quizBrain.getQuestionAnswer() == true) {
                         scoreKeeper.add(
                           const Icon(
                             Icons.check,
@@ -74,7 +72,7 @@ class _QuizPageState extends State<QuizPage> {
                           ),
                         );
                       }
-                      qno++;
+                      quizBrain.nextQuestion();
                     });
                   },
                   style: ButtonStyle(
@@ -96,7 +94,7 @@ class _QuizPageState extends State<QuizPage> {
               child: ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      if (quizBrain.getQuestionAnswer(qno) == false) {
+                      if (quizBrain.getQuestionAnswer() == false) {
                         scoreKeeper.add(
                           const Icon(
                             Icons.check,
@@ -111,7 +109,7 @@ class _QuizPageState extends State<QuizPage> {
                           ),
                         );
                       }
-                      qno++;
+                      quizBrain.nextQuestion();
                     });
                   },
                   style: ButtonStyle(
