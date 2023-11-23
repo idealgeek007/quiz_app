@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'question.dart';
 import 'quiz_brain.dart';
 
 QuizBrain quizBrain = QuizBrain();
@@ -45,8 +44,8 @@ class _QuizPageState extends State<QuizPage> {
           flex: 6,
           child: Center(
               child: Text(
-            quizBrain.questionBank[qno].questionText,
-            style: TextStyle(color: Colors.white, fontSize: 20),
+            quizBrain.getQuestionText(qno),
+            style: const TextStyle(color: Colors.white, fontSize: 20),
             textAlign: TextAlign.center,
           )),
         ),
@@ -60,7 +59,7 @@ class _QuizPageState extends State<QuizPage> {
                   onPressed: () {
                     // User picked true
                     setState(() {
-                      if (quizBrain.questionBank[qno].questionAnswer == true) {
+                      if (quizBrain.getQuestionAnswer(qno) == true) {
                         scoreKeeper.add(
                           const Icon(
                             Icons.check,
@@ -97,7 +96,7 @@ class _QuizPageState extends State<QuizPage> {
               child: ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      if (quizBrain.questionBank[qno].questionAnswer == false) {
+                      if (quizBrain.getQuestionAnswer(qno) == false) {
                         scoreKeeper.add(
                           const Icon(
                             Icons.check,
