@@ -44,11 +44,22 @@ class QuizBrain {
     }
   }
 
+  bool checkEnd() {
+    if (_qno == _questionBank.length - 1) {
+      return true;
+    }
+    return false;
+  }
+
   String getQuestionText() {
     return _questionBank[_qno].questionText;
   }
 
   bool getQuestionAnswer() {
     return _questionBank[_qno].questionAnswer;
+  }
+
+  int totalQuestions() {
+    return _questionBank.length;
   }
 }
