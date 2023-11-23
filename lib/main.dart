@@ -1,7 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'question.dart';
+import 'quiz_brain.dart';
+
+QuizBrain quizBrain = QuizBrain();
 
 void main() {
   runApp(const Quizzy());
@@ -34,18 +35,6 @@ int qno = 0;
 
 class _QuizPageState extends State<QuizPage> {
   List<Widget> scoreKeeper = [];
-
-  Question q1 = Question(
-      q: 'You can lead a cow down stairs but not up stairs.', a: false);
-
-  List<Question> questionBank = [
-    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
-    Question(
-        q: 'Approximately one quarter of human bones are in the feet.',
-        a: true),
-    Question(q: 'A slug\'s blood is green.', a: true)
-  ];
-
   @override
   Widget build(BuildContext) {
     return Column(
@@ -56,7 +45,7 @@ class _QuizPageState extends State<QuizPage> {
           flex: 6,
           child: Center(
               child: Text(
-            questionBank[qno].questionText,
+            quizBrain.questionBank[qno].questionText,
             style: TextStyle(color: Colors.white, fontSize: 20),
             textAlign: TextAlign.center,
           )),
@@ -71,7 +60,7 @@ class _QuizPageState extends State<QuizPage> {
                   onPressed: () {
                     // User picked true
                     setState(() {
-                      if (questionBank[qno].questionAnswer == true) {
+                      if (quizBrain.questionBank[qno].questionAnswer == true) {
                         scoreKeeper.add(
                           const Icon(
                             Icons.check,
@@ -108,7 +97,7 @@ class _QuizPageState extends State<QuizPage> {
               child: ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      if (questionBank[qno].questionAnswer == false) {
+                      if (quizBrain.questionBank[qno].questionAnswer == false) {
                         scoreKeeper.add(
                           const Icon(
                             Icons.check,
@@ -143,9 +132,3 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
-
-/*
-Quesiton 1: 'You can lead a cow down stairs but not up stairs. ' ,false,
-Question 2: 'Approximately one quarter of human bones are in the feet.' true,
-Question 3: 'A slug\'s blood is green.',  true,
-*/
